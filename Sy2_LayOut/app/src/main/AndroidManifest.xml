@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sy2_LayOut">
         <activity
+            android:name=".FlightBookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TableLayoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LinearLayoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

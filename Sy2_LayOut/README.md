@@ -12,6 +12,4 @@
 ## 运行环境
 - Android Studio: 2025.1.4.8
 - SDK Version: API 24
-- Language: Java
-
-## 项目结构
+- Language: kotlin
