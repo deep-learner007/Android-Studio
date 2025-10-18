@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#F5F5F5"
+
+    android:layout_height="match_parent">
+
+
+    <!-- ✅ 顶部工具栏，用于显示菜单 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="界面实验"
+        app:titleTextColor="@android:color/white" />
+
+    <!-- 中间内容 -->
+    <TextView
+        android:id="@+id/tvSample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试文字 ABC"
+        android:textSize="16sp"
+        android:textColor="#000000"
+
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

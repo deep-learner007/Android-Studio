@@ -2,7 +2,9 @@
 .gitignore.swp
 build/
 gradle/
+.gradle/
 idea/
+.idea/
 local.properties
 app/build/
 app/libs/
@@ -11,7 +13,9 @@ app/proguard-rules.pro
 app/src/androidTest/
 app/src/test/
 local.properties
+*.log
 /.idea/workspace.xml
 /.idea/libraries
 /captures
+.DS_Store
 externalNativeBuild
