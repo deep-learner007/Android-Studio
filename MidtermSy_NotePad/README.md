@@ -108,6 +108,27 @@ mPaint.setStyle(Paint.Style.STROKE);
 mPaint.setColor(0x33CCCCCC); // 淡灰色行线
 }
 
+#### 列表适配器定制
+java
+// 在NotesList.java中自定义数据显示
+SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+this,
+R.layout.noteslist_item,
+cursor,
+dataColumns,
+viewIDs ) {
+@Override public void setViewText(TextView v, String text) {
+if (v.getId() == R.id.text2) {
+// 格式化时间戳显示
+long date = Long.parseLong(text);
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+v.setText(sdf.format(new Date(date)));
+} else {
+super.setViewText(v, text);
+}
+}
+};
+
 @Override
 protected void onDraw(Canvas canvas) {
 // 绘制行线
@@ -132,7 +153,8 @@ app/
 │ │ │ ├── TodoDbHelper.java # 待办数据库助手
 │ │ │ ├── TodoEditorActivity.java # 待办编辑器
 │ │ │ └── TodoListActivity.java # 待办列表
-│ │ ├── res/ │ │ │ ├── drawable/ # 图形资源
+│ │ ├── res/
+│ │ │ ├── drawable/ # 图形资源
 │ │ │ ├── layout/ # 布局文件
 │ │ │ ├── menu/ # 菜单资源
 │ │ │ └── values/ # 字符串、颜色、样式等
