@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--  This is our one standard application action (creating a new note). -->
+    <item android:id="@+id/menu_add"
+          android:icon="@drawable/ic_menu_compose"
+          android:title="@string/menu_add"
+          android:alphabeticShortcut='a'
+          android:showAsAction="always" />
+    <!--  If there is currently data in the clipboard, this adds a PASTE menu item to the menu
+          so that the user can paste in the data.. -->
+    <item android:id="@+id/menu_paste"
+          android:icon="@drawable/ic_menu_compose"
+          android:title="@string/menu_paste"
+          android:alphabeticShortcut='p' />
+
+    <!-- 添加搜索菜单项 -->
+    <item android:id="@+id/menu_search"
+        android:icon="@drawable/ic_menu_search"
+        android:title="@string/menu_search"
+        android:showAsAction="ifRoom|withText" />
+
+<!--    添加待办菜单项-->
+    <!-- 修改 / 新增菜单项： app/src/main/res/menu/list_options_menu.xml -->
+    <!-- 在该文件的合适位置添加以下 item -->
+    <item
+        android:id="@+id/menu_add_todo"
+        android:title="添加待办"
+        android:icon="@android:drawable/ic_input_add"
+        android:showAsAction="never" />
+
+
+</menu>
