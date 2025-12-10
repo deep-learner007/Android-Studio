@@ -72,86 +72,6 @@ public class NotesList extends ListActivity {
     /**
      * The columns needed by the cursor adapter
      */
-    //原代码
-//    private static final String[] PROJECTION = new String[] {
-//            NotePad.Notes._ID, // 0
-//            NotePad.Notes.COLUMN_NAME_TITLE, // 1
-//    };
-//
-//    /** The index of the title column */
-//    private static final int COLUMN_INDEX_TITLE = 1;
-//
-//    /**
-//     * onCreate is called when Android starts this Activity from scratch.
-//     */
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        // The user does not need to hold down the key to use menu shortcuts.
-//        setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
-//
-//        /* If no data is given in the Intent that started this Activity, then this Activity
-//         * was started when the intent filter matched a MAIN action. We should use the default
-//         * provider URI.
-//         */
-//        // Gets the intent that started this Activity.
-//        Intent intent = getIntent();
-//
-//        // If there is no data associated with the Intent, sets the data to the default URI, which
-//        // accesses a list of notes.
-//        if (intent.getData() == null) {
-//            intent.setData(NotePad.Notes.CONTENT_URI);
-//        }
-//
-//        /*
-//         * Sets the callback for context menu activation for the ListView. The listener is set
-//         * to be this Activity. The effect is that context menus are enabled for items in the
-//         * ListView, and the context menu is handled by a method in NotesList.
-//         */
-//        getListView().setOnCreateContextMenuListener(this);
-//
-//        /* Performs a managed query. The Activity handles closing and requerying the cursor
-//         * when needed.
-//         *
-//         * Please see the introductory note about performing provider operations on the UI thread.
-//         */
-//        Cursor cursor = managedQuery(
-//            getIntent().getData(),            // Use the default content URI for the provider.
-//            PROJECTION,                       // Return the note ID and title for each note.
-//            null,                             // No where clause, return all records.
-//            null,                             // No where clause, therefore no where column values.
-//            NotePad.Notes.DEFAULT_SORT_ORDER  // Use the default sort order.
-//        );
-//
-//        /*
-//         * The following two arrays create a "map" between columns in the cursor and view IDs
-//         * for items in the ListView. Each element in the dataColumns array represents
-//         * a column name; each element in the viewID array represents the ID of a View.
-//         * The SimpleCursorAdapter maps them in ascending order to determine where each column
-//         * value will appear in the ListView.
-//         */
-//
-//        // The names of the cursor columns to display in the view, initialized to the title column
-//        String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE } ;
-//
-//        // The view IDs that will display the cursor columns, initialized to the TextView in
-//        // noteslist_item.xml
-//        int[] viewIDs = { android.R.id.text1 };
-//
-//        // Creates the backing adapter for the ListView.
-//        SimpleCursorAdapter adapter
-//            = new SimpleCursorAdapter(
-//                      this,                             // The Context for the ListView
-//                      R.layout.noteslist_item,          // Points to the XML for a list item
-//                      cursor,                           // The cursor to get items from
-//                      dataColumns,
-//                      viewIDs
-//              );
-//
-//        // Sets the ListView's adapter to be the cursor adapter that was just created.
-//        setListAdapter(adapter);
-//    }
 
     //修改代码：
     // 在 NotesList.java 中添加新的投影
@@ -165,6 +85,8 @@ public class NotesList extends ListActivity {
     private static final int COLUMN_INDEX_TITLE = 1;
     /** The index of the modification date column */
     private static final int COLUMN_INDEX_MODIFICATION = 2;
+
+
 
     // 修改 onCreate 方法中的适配器设置部分
     @Override
@@ -194,6 +116,14 @@ public class NotesList extends ListActivity {
          */
         getListView().setOnCreateContextMenuListener(this);
 
+        // 检查是否有搜索参数
+        String selection = null;
+        String[] selectionArgs = null;
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            selection = intent.getStringExtra("search_selection");
+            selectionArgs = intent.getStringArrayExtra("search_selection_args");
+        }
+
         /* Performs a managed query. The Activity handles closing and requerying the cursor
          * when needed.
          *
@@ -202,8 +132,8 @@ public class NotesList extends ListActivity {
         Cursor cursor = managedQuery(
                 getIntent().getData(),            // Use the default content URI for the provider.
                 PROJECTION,                       // Return the note ID, title and modification date.
-                null,                             // No where clause, return all records.
-                null,                             // No where clause, therefore no where column values.
+                selection,                        // Use search selection if available
+                selectionArgs,                    // Use search selection args if available
                 NotePad.Notes.DEFAULT_SORT_ORDER  // Use the default sort order.
         );
 
@@ -273,6 +203,8 @@ public class NotesList extends ListActivity {
         // Sets the ListView's adapter to be the cursor adapter that was just created.
         setListAdapter(adapter);
     }
+
+
 
 
     /**
@@ -400,28 +332,6 @@ public class NotesList extends ListActivity {
      */
 
 
-    //原onOptionsItemSelected方法
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.menu_add) {
-//            /*
-//             * Launches a new Activity using an Intent. The intent filter for the Activity
-//             * has to have action ACTION_INSERT. No category is set, so DEFAULT is assumed.
-//             * In effect, this starts the NoteEditor Activity in NotePad.
-//             */
-//            startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
-//            return true;
-//        } else if (item.getItemId() == R.id.menu_paste) {
-//            /*
-//             * Launches a new Activity using an Intent. The intent filter for the Activity
-//             * has to have action ACTION_PASTE. No category is set, so DEFAULT is assumed.
-//             * In effect, this starts the NoteEditor Activity in NotePad.
-//             */
-//            startActivity(new Intent(Intent.ACTION_PASTE, getIntent().getData()));
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     /**
      * This method is called when the user context-clicks a note in the list. NotesList registers
@@ -572,9 +482,16 @@ public class NotesList extends ListActivity {
 
             // Returns to the caller and skips further processing.
             return true;
+        } else if (id == R.id.context_edit_title) {
+            // 启动标题编辑器
+            Intent intent = new Intent(this, TitleEditor.class);
+            intent.setData(noteUri);
+            startActivity(intent);
+            return true;
         }
         return super.onContextItemSelected(item);
     }
+
 
     /**
      * This method is called when the user clicks a note in the displayed list.
@@ -602,49 +519,20 @@ public class NotesList extends ListActivity {
             // Sets the result to return to the component that called this Activity. The
             // result contains the new URI
             setResult(RESULT_OK, new Intent().setData(uri));
+            finish();
         } else {
-
-//            // Sends out an Intent to start an Activity that can handle ACTION_EDIT. The
-//            // Intent's data is the note ID URI. The effect is to call NoteEdit.
-//            startActivity(new Intent(Intent.ACTION_EDIT, uri));
 
             // Sends out an Intent to start NoteEditor explicitly
             Intent editIntent = new Intent(Intent.ACTION_EDIT, uri);
             editIntent.setClass(this, NoteEditor.class);
+            // 添加标志以确保正确的任务栈处理
+            editIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(editIntent);
-
         }
     }
 
-    // 在 NotesList.java 中添加 onOptionsItemSelected 方法处理
-    //查询功能-2次修改
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_add:
-//                /*
-//                 * Launches a new Activity using an Intent. The intent filter for the Activity
-//                 * has to have action ACTION_INSERT. No category is set, so DEFAULT is assumed.
-//                 * In effect, this starts the NoteEditor Activity in NotePad.
-//                 */
-//                startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
-//                return true;
-//            case R.id.menu_paste:
-//                /*
-//                 * Launches a new Activity using an Intent. The intent filter for the Activity
-//                 * has to have action ACTION_PASTE. No category is set, so DEFAULT is assumed.
-//                 * In effect, this starts the NoteEditor Activity in NotePad.
-//                 */
-//                startActivity(new Intent(Intent.ACTION_PASTE, getIntent().getData()));
-//                return true;
-//            case R.id.menu_search:
-//                // 显示搜索对话框
-//                showSearchDialog();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+    //aa11 end
+
 
 
     @Override
@@ -714,24 +602,21 @@ public class NotesList extends ListActivity {
                 "%" + query + "%"
         };
 
-        refreshList(selection, selectionArgs);
+        //aa22 b
+//        refreshList(selection, selectionArgs);
+        //aa22 e
+
+        //aa22b
+
+        // 使用新的Intent启动搜索结果Activity，避免修改当前Activity的数据源
+        Intent searchIntent = new Intent(this, NotesList.class);
+        searchIntent.setAction(Intent.ACTION_SEARCH);
+        searchIntent.putExtra("search_selection", selection);
+        searchIntent.putExtra("search_selection_args", selectionArgs);
+        startActivity(searchIntent);
+        //aa22e
     }
 
-    // 添加刷新列表方法
-//    private void refreshList(String selection, String[] selectionArgs) {
-//        // 重新查询数据
-//        Cursor cursor = managedQuery(
-//                getIntent().getData(),            // Use the default content URI for the provider.
-//                PROJECTION,                       // Return the note ID, title and modification date.
-//                selection,                        // Selection criteria
-//                selectionArgs,                    // Selection arguments
-//                NotePad.Notes.DEFAULT_SORT_ORDER  // Use the default sort order.
-//        );
-//
-//        // 更新适配器
-//        SimpleCursorAdapter adapter = (SimpleCursorAdapter) getListAdapter();
-//        adapter.changeCursor(cursor);
-//    }
 
     // 添加刷新列表方法
     private void refreshList(String selection, String[] selectionArgs) {

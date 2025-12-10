@@ -141,24 +141,26 @@ super.onDraw(canvas);
 }
 
 ## 项目结构
+
 app/
 ├── src/
-│ ├── main/
-│ │ ├── java/com/example/android/notepad/
-│ │ │ ├── NoteEditor.java # 笔记编辑器
-│ │ │ ├── NotePad.java # 数据契约类
-│ │ │ ├── NotePadProvider.java # 内容提供者
-│ │ │ ├── NotesList.java # 笔记列表
-│ │ │ ├── TitleEditor.java # 标题编辑器
-│ │ │ ├── TodoDbHelper.java # 待办数据库助手
-│ │ │ ├── TodoEditorActivity.java # 待办编辑器
-│ │ │ └── TodoListActivity.java # 待办列表
-│ │ ├── res/
-│ │ │ ├── drawable/ # 图形资源
-│ │ │ ├── layout/ # 布局文件
-│ │ │ ├── menu/ # 菜单资源
-│ │ │ └── values/ # 字符串、颜色、样式等
-│ │ └── AndroidManifest.xml # 应用配置文件
+│ └── main/
+│ ├── java/com/example/android/notepad/
+│ │ ├── NoteEditor.java # 笔记编辑器
+│ │ ├── NotePad.java # 数据契约类
+│ │ ├── NotePadProvider.java # 内容提供者
+│ │ ├── NotesList.java # 笔记列表
+│ │ ├── TitleEditor.java # 标题编辑器
+│ │ ├── TodoDbHelper.java # 待办数据库助手
+│ │ ├── TodoEditorActivity.java # 待办编辑器
+│ │ └── TodoListActivity.java # 待办列表
+│ └── res/
+│ ├── drawable/ # 图形资源
+│ ├── layout/ # 布局文件
+│ ├── menu/ # 菜单资源
+│ └── values/ # 字符串、颜色、样式等
+└── AndroidManifest.xml # 应用配置文件
+
 
 ## 功能模块说明
 
@@ -187,7 +189,7 @@ app/
 1. 启动应用进入笔记列表界面
 2. 点击"+"按钮创建新笔记
 3. 点击任意笔记条目可进行编辑
-4. 长按笔记条目可执行更多操作（打开、复制、删除）
+4. 长按笔记条目可执行更多操作（打开、复制、删除、编辑标题）
 5. 使用搜索功能快速查找笔记
 6. 通过待办事项功能管理个人任务
 

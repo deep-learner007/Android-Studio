@@ -6,4 +6,8 @@
           android:title="@string/menu_copy" />
     <item android:id="@+id/context_delete"
           android:title="@string/menu_delete" />
+
+    <!-- 添加编辑标题菜单项 -->
+    <item android:id="@+id/context_edit_title"
+        android:title="@string/resolve_title" />
 </menu>

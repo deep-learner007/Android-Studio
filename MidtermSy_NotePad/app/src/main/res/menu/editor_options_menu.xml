@@ -12,4 +12,10 @@
           android:icon="@drawable/ic_menu_delete"
           android:title="@string/menu_delete"
           android:showAsAction="ifRoom|withText" />
+
+    <!-- 添加编辑标题菜单项 -->
+    <item android:id="@+id/menu_edit_title"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/resolve_title"
+        android:showAsAction="ifRoom|withText" />
 </menu>

@@ -136,33 +136,61 @@ public class TitleEditor extends Activity {
         // Verifies that the query made in onCreate() actually worked. If it worked, then the
         // Cursor object is not null. If it is *empty*, then mCursor.getCount() == 0.
 
-        if (mCursor != null) {
+//        if (mCursor != null) {
+//
+//            // Creates a values map for updating the provider.
+//            ContentValues values = new ContentValues();
+//
+//            // In the values map, sets the title to the current contents of the edit box.
+//            values.put(NotePad.Notes.COLUMN_NAME_TITLE, mText.getText().toString());
+//
+//            /*
+//             * Updates the provider with the note's new title.
+//             *
+//             * Note: This is being done on the UI thread. It will block the thread until the
+//             * update completes. In a sample app, going against a simple provider based on a
+//             * local database, the block will be momentary, but in a real app you should use
+//             * android.content.AsyncQueryHandler or android.os.AsyncTask.
+//             */
+//            getContentResolver().update(
+//                mUri,    // The URI for the note to update.
+//                values,  // The values map containing the columns to update and the values to use.
+//                null,    // No selection criteria is used, so no "where" columns are needed.
+//                null     // No "where" columns are used, so no "where" values are needed.
+//            );
+//
+//        }
+    }
 
-            // Creates a values map for updating the provider.
+//    public void onClickOk(View v) {
+//        finish();
+//    }
+
+    public void onClickOk(View v) {
+        // 在完成前先保存标题
+        saveTitle();
+        finish();
+    }
+
+    // 添加一个专门的保存方法
+    private void saveTitle() {
+        if (mCursor != null) {
+            // 创建一个值映射用于更新提供者
             ContentValues values = new ContentValues();
 
-            // In the values map, sets the title to the current contents of the edit box.
+            // 在值映射中，将标题设置为编辑框的当前内容
             values.put(NotePad.Notes.COLUMN_NAME_TITLE, mText.getText().toString());
 
             /*
-             * Updates the provider with the note's new title.
-             *
-             * Note: This is being done on the UI thread. It will block the thread until the
-             * update completes. In a sample app, going against a simple provider based on a
-             * local database, the block will be momentary, but in a real app you should use
-             * android.content.AsyncQueryHandler or android.os.AsyncTask.
+             * 更新提供者中的笔记标题
              */
             getContentResolver().update(
-                mUri,    // The URI for the note to update.
-                values,  // The values map containing the columns to update and the values to use.
-                null,    // No selection criteria is used, so no "where" columns are needed.
-                null     // No "where" columns are used, so no "where" values are needed.
+                    mUri,    // 要更新的笔记的URI
+                    values,  // 包含要更新的列和使用的值的映射
+                    null,    // 不使用选择标准，因此不需要"where"列
+                    null     // 不使用"where"列，因此不需要"where"值
             );
-
         }
     }
 
-    public void onClickOk(View v) {
-        finish();
-    }
 }

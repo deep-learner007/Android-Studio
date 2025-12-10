@@ -523,6 +523,11 @@ public class NoteEditor extends Activity {
             finish();
         } else if (id == R.id.menu_revert) {
             cancelNote();
+        } else if (id == R.id.menu_edit_title) {
+            // 启动标题编辑器
+            Intent intent = new Intent(this, TitleEditor.class);
+            intent.setData(mUri);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
