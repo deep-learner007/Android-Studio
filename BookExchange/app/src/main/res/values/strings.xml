@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">校园二手书交易</string>
+    
+    <!-- Auth strings -->
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="email">邮箱</string>
+    <string name="password">密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="username">用户名</string>
+    <string name="school_email">学校邮箱</string>
+    <string name="verification_code">验证码</string>
+    <string name="send_code">发送验证码</string>
+    <string name="verify">验证</string>
+    <string name="resend">重新发送</string>
+    
+    <!-- Book strings -->
+    <string name="book_title">书名</string>
+    <string name="book_author">作者</string>
+    <string name="book_price">价格</string>
+    <string name="book_condition">成色</string>
+    <string name="book_category">分类</string>
+    <string name="book_description">描述</string>
+    <string name="add_book">发布书籍</string>
+    <string name="edit_book">编辑书籍</string>
+    <string name="delete_book">删除书籍</string>
+    <string name="my_books">我的书籍</string>
+    <string name="all_books">全部书籍</string>
+    <string name="search_books">搜索书籍</string>
+    <string name="book_details">书籍详情</string>
+    
+    <!-- Transaction strings -->
+    <string name="buy">购买</string>
+    <string name="contact_seller">联系卖家</string>
+    <string name="my_purchases">我的购买</string>
+    <string name="my_sales">我的出售</string>
+    <string name="transaction_history">交易记录</string>
+    
+    <!-- Navigation strings -->
+    <string name="home">首页</string>
+    <string name="favorites">收藏</string>
+    <string name="messages">消息</string>
+    <string name="profile">我的</string>
+    
+    <!-- Common strings -->
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="loading">加载中…</string>
+    <string name="no_data">暂无数据</string>
+    <string name="error">错误</string>
+    <string name="success">成功</string>
+    
+    <!-- Condition strings -->
+    <string name="condition_new">全新</string>
+    <string name="condition_excellent">九成新</string>
+    <string name="condition_good">八成新</string>
+    <string name="condition_fair">七成新</string>
+    
+    <!-- Category strings -->
+    <string name="category_textbook">教材</string>
+    <string name="category_novel">小说</string>
+    <string name="category_technical">技术书籍</string>
+    <string name="category_other">其他</string>
+</resources>
